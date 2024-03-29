@@ -1,4 +1,8 @@
-class screen {
+module;
+
+export module screen;
+
+export class screen {
 public:
 
     virtual void update() = 0;
