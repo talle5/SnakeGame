@@ -1,12 +1,8 @@
-//
-// Created by talles on 1/2/24.
-//
+module;
 
-#ifndef BOX2DANDRAYLIB_SQUARE_HPP
-#define BOX2DANDRAYLIB_SQUARE_HPP
+import <raylib.h>;
 
-#include <raylib.h>
-
+export module square;
 
 export struct Square : public Rectangle {
     enum direcao {
@@ -39,33 +35,12 @@ export struct Square : public Rectangle {
     }
 };
 
-#include <cstdlib>
-#include <ctime>
-
-struct RNG {
-    static float next(uint rangeup) {
-        srand(time(NULL));
-        int _rand = rand();
-        _rand *= rand() * 1234;
-        _rand &= 0xFFFFFFF;
-        return static_cast<float>(_rand % rangeup);
-    }
-};
-
-struct Coin : public Square {
+export struct Coin : public Square {
     Texture2D texture;
 
-    Coin() : Square(RNG::next(770), RNG::next(570)), texture(LoadTexture("/home/talles/m.png")) {}
+    Coin() : Square(50,50), texture(LoadTexture("/home/talles/m.png")) {}
 
     virtual ~Coin() {
         UnloadTexture(texture);
     }
-
-    void changeposition() {
-        x  = RNG::next(800);
-        y = RNG::next(600);
-    }
-
 };
-
-#endif //BOX2DANDRAYLIB_SQUARE_HPP

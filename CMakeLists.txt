@@ -29,8 +29,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        square.ixx
-        playgame.cpp)
+        square.cpp
+)
 #set(raylib_VERBOSE 1)
 include_directories(CMAKE_INCLUDE_PATH)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)

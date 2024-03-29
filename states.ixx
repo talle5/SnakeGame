@@ -1,8 +1,3 @@
-#if !defined(STATE)
-#define STATE
-
-#include "square.ixx"
-
 class screen {
 public:
 
@@ -14,6 +9,3 @@ public:
 
     virtual ~screen() = default;
 };
-
-
-#endif

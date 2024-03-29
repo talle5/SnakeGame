@@ -1,7 +1,7 @@
-#include <raylib.h>
-#include <thread>
-#include "playgame.ixx"
-#include "rlgl.h"
+import <raylib.h>;
+import <thread>;
+import <rlgl.h>;
+import play;
 
 int main() {
     InitWindow(800, 600, "snake");
