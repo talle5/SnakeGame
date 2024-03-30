@@ -38,7 +38,7 @@ export struct Square : public Rectangle {
 export struct Coin : public Square {
     Texture2D texture;
 
-    Coin() : Square(50,50), texture(LoadTexture("/home/talles/m.png")) {}
+    Coin() : Square(50, 50), texture(LoadTexture("/home/talles/m.png")) {}
 
     virtual ~Coin() {
         UnloadTexture(texture);
