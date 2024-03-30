@@ -3,17 +3,19 @@ module;
 import <list>;
 import <raylib.h>;
 import square;
+import rng;
 
 export module play;
 
 export class PlayRun {
     std::list<Square> snake;
     std::list<Square> chanchedpositions;
+    RNG rand;
     Square *head;
-    Coin coin;
+    Square coin;
 public:
 
-    PlayRun() {
+    PlayRun() : coin(rand.nextDouble(0,770),rand.nextDouble(0,570)) {
         snake.emplace_back(GetScreenWidth() / 2, GetScreenHeight() / 2);
         head = &snake.front();
     }
@@ -80,6 +82,8 @@ public:
 
         }
         if (colisionwhime(coin, *head)) {
+            coin.x = rand.nextDouble(0,770);
+            coin.y = rand.nextDouble(0,570);
             add();
         }
     }

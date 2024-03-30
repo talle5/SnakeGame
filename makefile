@@ -7,7 +7,7 @@ OPT=-O3 $(STD) $(MODULES)
 CCFLAGS=$(OPT) $(WARN) -pipe
 LD=g++
 LDFLAGS=-lraylib
-OBJS=square.o playgame.o main.o
+OBJS=square.o rand.o playgame.o main.o
 
 all: modules $(OBJS)
 	$(LD) -o $(TARGET) $(OBJS) $(LDFLAGS)
@@ -21,9 +21,13 @@ playgame.o: src/playgame.cpp
 square.o: src/square.cpp
 	$(CC) -c $(CCFLAGS) src/square.cpp -o square.o
 
+rand.o: src/rand.cpp
+	$(CC) -c $(CCFLAGS) src/rand.cpp -o rand.o
+
 modules:
 	g++ $(OPT) -c -x c++-system-header thread
 	g++ $(OPT) -c -x c++-system-header list
+	g++ $(OPT) -c -x c++-system-header random
 	g++ $(OPT) -c -x c++-system-header raylib.h
 	g++ $(OPT) -c -x c++-system-header rlgl.h
 

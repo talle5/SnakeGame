@@ -13,10 +13,6 @@ export struct Square : public Rectangle {
         None,
     };
     direcao direction;
-//    float height{30};
-//    float width{30};
-//    Vector2 size;
-//    Vector2 position;
 
     Square(float x, float y) : Rectangle(), direction(None) {
         this->x = x;
@@ -32,15 +28,5 @@ export struct Square : public Rectangle {
 
     bool operator==(const Square &square) const {
         return this == &square;
-    }
-};
-
-export struct Coin : public Square {
-    Texture2D texture;
-
-    Coin() : Square(50, 50), texture(LoadTexture("/home/talles/m.png")) {}
-
-    virtual ~Coin() {
-        UnloadTexture(texture);
     }
 };
