@@ -3,24 +3,29 @@ module;
 import <list>;
 import <raylib.h>;
 import square;
+import screen;
 import rng;
+import game;
+import over;
+import pause;
 
 export module play;
 
-export class PlayRun {
+export class PlayRun : public screen{
     std::list<Square> snake;
     std::list<Square> chanchedpositions;
+    Game* manager;
     RNG rand;
     Square *head;
     Square coin;
 public:
 
-    PlayRun() : coin(rand.nextDouble(0,770),rand.nextDouble(0,570)) {
+    PlayRun(Game* manage) : manager(manage), coin(rand.nextDouble(0,770),rand.nextDouble(0,570)) {
         snake.emplace_back(GetScreenWidth() / 2, GetScreenHeight() / 2);
         head = &snake.front();
     }
 
-    void draw() {
+    void draw() override {
         //DrawFPS(5, 5);
         //DrawText(std::to_string(chanchedpositions.size()).c_str(), 4.54.5, 10, 20, YELLOW);
         DrawRectangleRec(coin, WHITE);
@@ -29,7 +34,7 @@ public:
         }
     }
 
-    void update() {
+    void update() override {
         int i{};
         for (Square &square: snake) {
             checkposition(square);
@@ -48,7 +53,7 @@ public:
                     break;
             }
             if (i > 4 && colisionwhime(*head, square)) {
-                restartgame();
+                manager->addScreen(new Gameover(manager));
                 return;
             }
             ++i;
@@ -75,10 +80,14 @@ public:
                 *head = Square::direcao::Rigth;
                 chanchedpositions.push_back(*head);
                 break;
+            case KEY_SPACE:
+                manager->addScreen(new Pause(manager));
+                return;
         }
         if (head->x > 800 || head->x < 0 || head->y < 0 ||
             head->y > 600) {
-            restartgame();
+            manager->addScreen(new Gameover(manager));
+            return;
 
         }
         if (colisionwhime(coin, *head)) {

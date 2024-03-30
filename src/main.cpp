@@ -1,18 +1,20 @@
 import <raylib.h>;
 import <thread>;
 import <rlgl.h>;
+import game;
 import play;
 
 int main() {
     InitWindow(800, 600, "snake");
-    PlayRun game;
+    Game kk;
+    kk.addScreen(new PlayRun(&kk));
     std::chrono::milliseconds sleep_time(16);
     while (!WindowShouldClose()) {
         BeginDrawing();
         rlClearScreenBuffers();
-        game.draw();
+        kk.draw();
         EndDrawing();
-        game.update();
+        kk.update();
         std::this_thread::sleep_for(sleep_time);
     }
     CloseWindow();
