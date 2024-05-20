@@ -1,12 +1,10 @@
-module;
+#pragma once
+#include "screen.h"
+#include <stack>
+#include <raylib.h>
 
-import<stack>;
-import screen;
-
-export module game;
-
-export class Game {
-    std::stack<screen *> gamemanager;
+class Game {
+    std::stack<screen *> gamemanager{};
 public:
     void update() { gamemanager.top()->update(); }
 

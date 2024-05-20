@@ -1,17 +1,14 @@
-module;
+#pragma once
+#include "game.h"
+#include "gameover.h"
+#include "pause.h"
+#include "rand.h"
+#include "square.h"
+#include <iostream>
+#include <list>
 
-import <list>;
-import <raylib.h>;
-import square;
-import screen;
-import rng;
-import game;
-import over;
-import pause;
-
-export module play;
-
-export class PlayRun : public screen{
+class PlayRun : public screen
+{
     std::list<Square> snake;
     std::list<Square> chanchedpositions;
     Game* manager;
@@ -20,14 +17,12 @@ export class PlayRun : public screen{
     Square coin;
 public:
 
-    PlayRun(Game* manage) : manager(manage), coin(rand.nextDouble(0,770),rand.nextDouble(0,570)) {
+    explicit PlayRun(Game* manage) : manager(manage), coin(rand.nextFloat(0,770),rand.nextFloat(0,570)) {
         snake.emplace_back(GetScreenWidth() / 2, GetScreenHeight() / 2);
         head = &snake.front();
     }
 
     void draw() override {
-        //DrawFPS(5, 5);
-        //DrawText(std::to_string(chanchedpositions.size()).c_str(), 4.54.5, 10, 20, YELLOW);
         DrawRectangleRec(coin, WHITE);
         for (Square &square: snake) {
             DrawRectangleRec(square, VIOLET);
@@ -54,12 +49,18 @@ public:
             }
             if (i > 4 && colisionwhime(*head, square)) {
                 manager->addScreen(new Gameover(manager));
+                restartgame();
                 return;
             }
             ++i;
         }
-
-        switch (GetKeyPressed()) {
+        int a = GetKeyPressed();
+        for (auto j=1;j<=100;++j) {
+            if (a == j) {
+                std::cout<< j <<'\n';
+            }
+        }
+        switch (a) {
             case KEY_UP:
                 if (head->direction == Square::Down) return;
                 *head = Square::direcao::Up;
@@ -87,12 +88,13 @@ public:
         if (head->x > 800 || head->x < 0 || head->y < 0 ||
             head->y > 600) {
             manager->addScreen(new Gameover(manager));
+            restartgame();
             return;
 
         }
         if (colisionwhime(coin, *head)) {
-            coin.x = rand.nextDouble(0,770);
-            coin.y = rand.nextDouble(0,570);
+            coin.x = rand.nextFloat(0,770);
+            coin.y = rand.nextFloat(0,570);
             add();
         }
     }
@@ -125,7 +127,7 @@ public:
         }
     }
 
-    bool colisionwhime(Square &entity1, Square &entity2) {
+    inline bool colisionwhime(Square &entity1, Square &entity2) {
         return entity1.x < entity2.x + entity2.width &&
                entity1.x + entity1.width > entity2.x &&
                entity1.y < entity2.y + entity2.height &&

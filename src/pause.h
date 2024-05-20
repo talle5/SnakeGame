@@ -1,12 +1,7 @@
-module;
+#pragma once
+#include "screen.h"
 
-import<raylib.h>;
-import screen;
-import game;
-
-export module pause;
-
-export class Pause : public screen {
+class Pause : public screen {
     Game* _gamemanager;
 public:
 

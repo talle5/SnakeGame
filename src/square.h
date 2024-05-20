@@ -1,10 +1,7 @@
-module;
+#pragma once
+#include <raylib.h>
 
-import <raylib.h>;
-
-export module square;
-
-export struct Square : public Rectangle {
+struct Square : public Rectangle {
     enum direcao {
         Up,
         Down,
