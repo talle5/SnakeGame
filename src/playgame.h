@@ -54,13 +54,7 @@ public:
             }
             ++i;
         }
-        int a = GetKeyPressed();
-        for (auto j=1;j<=100;++j) {
-            if (a == j) {
-                std::cout<< j <<'\n';
-            }
-        }
-        switch (a) {
+        switch(GetKeyPressed()) {
             case KEY_UP:
                 if (head->direction == Square::Down) return;
                 *head = Square::direcao::Up;
@@ -83,6 +77,7 @@ public:
                 break;
             case KEY_SPACE:
                 manager->addScreen(new Pause(manager));
+                std::cout << GetScreenHeight() << ',' << GetScreenWidth() << '\n';
                 return;
         }
         if (head->x > 800 || head->x < 0 || head->y < 0 ||

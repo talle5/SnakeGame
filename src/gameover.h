@@ -1,5 +1,6 @@
 #pragma once
 #include "game.h"
+#include "playgame.h"
 
 class Gameover : public screen
 {

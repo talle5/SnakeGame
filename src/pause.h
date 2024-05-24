@@ -5,7 +5,7 @@ class Pause : public screen {
     Game* _gamemanager;
 public:
 
-    Pause(Game* gamemanager) : _gamemanager(gamemanager) {}
+    explicit Pause(Game* gamemanager) : _gamemanager(gamemanager) {}
 
     void update() override {
         if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER)) {
