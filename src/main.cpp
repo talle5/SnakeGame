@@ -8,12 +8,12 @@ int main() {
     Game game;
     game.addScreen(new PlayRun(&game));
     while (!WindowShouldClose()) {
+        game.update();
         BeginDrawing();
         rlClearScreenBuffers();
         game.draw();
         DrawFPS(10,10);
         EndDrawing();
-        game.update();
     }
     CloseWindow();
 }
